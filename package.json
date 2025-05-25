@@ -1,0 +1,75 @@
+{
+  "name": "flowly",
+  "version": "1.0.0",
+  "description": "Cross-Platform Business Communication Suite",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && uvicorn app.main:app --reload --host 0.0.0.0 --port 8000",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:desktop": "cd frontend && npm run tauri:dev",
+    "dev:mobile:ios": "cd frontend && npx cap run ios",
+    "dev:mobile:android": "cd frontend && npx cap run android",
+    
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && python -m build",
+    "build:desktop": "cd frontend && npm run tauri:build",
+    "build:mobile:ios": "cd frontend && npx cap build ios",
+    "build:mobile:android": "cd frontend && npx cap build android",
+    "build:all": "npm run build:frontend && npm run build:desktop && npm run build:mobile:ios && npm run build:mobile:android",
+    
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd backend && python -m pytest",
+    "test:frontend": "cd frontend && npm run test",
+    "test:e2e": "cd tests && npm run test:e2e",
+    
+    "lint": "npm run lint:backend && npm run lint:frontend",
+    "lint:backend": "cd backend && python -m flake8 app/",
+    "lint:frontend": "cd frontend && npm run lint",
+    
+    "setup": "npm run setup:backend && npm run setup:frontend",
+    "setup:backend": "cd backend && pip install -r requirements.txt && alembic upgrade head",
+    "setup:frontend": "cd frontend && npm install",
+    "setup:desktop": "cd frontend && npm install @tauri-apps/cli",
+    "setup:mobile": "cd frontend && npm install @capacitor/cli && npx cap add ios && npx cap add android",
+    
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:build": "docker-compose build",
+    
+    "deploy:web": "cd frontend && npm run build && npm run deploy",
+    "deploy:desktop": "cd frontend && npm run tauri:build",
+    "deploy:mobile": "npm run build:mobile:ios && npm run build:mobile:android"
+  },
+  "keywords": [
+    "business-communication",
+    "workflow-automation",
+    "cross-platform",
+    "ai-powered",
+    "crm",
+    "zalo-integration",
+    "react",
+    "fastapi",
+    "tauri",
+    "capacitor"
+  ],
+  "author": "Flowly Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/flowly.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/flowly/issues"
+  },
+  "homepage": "https://flowly.io",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}
